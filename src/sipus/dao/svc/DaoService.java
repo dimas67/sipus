@@ -16,6 +16,7 @@
  */
 package sipus.dao.svc;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -50,19 +51,19 @@ public class DaoService {
     private static TransaksiPeminjamanDao transaksiPeminjamanDao;
     private static AdminDao adminDao;
     private static DataPerusahaanDao dataPerusahaanDao;
-    private static String server, port, username, password;
+    private static String server, port, database, username, password;
 
     public static Connection getConnection() {
         loadConfig();
         Connection connection = null;
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Class.forName("com.mysql.jdbc.Driver");
 
-            OracleDataSource oracleDataSource = new OracleDataSource();
-            oracleDataSource.setURL("jdbc:oracle:thin:@" + server + ":" + port + ":XE");
-            oracleDataSource.setUser(username);
-            oracleDataSource.setPassword(password);
-            connection = oracleDataSource.getConnection();
+            MysqlDataSource mysqlDataSource = new MysqlDataSource();
+            mysqlDataSource.setURL("jdbc:mysql://" + server + ":" + port + "/" + database);
+            mysqlDataSource.setUser(username);
+            mysqlDataSource.setPassword(password);
+            connection = mysqlDataSource.getConnection();
         } catch (SQLException ex) {
             OptionPane.showErrorMessage("Koneksi Gagal : \n" + ex);
             Logger.getLogger(DaoService.class.getName()).log(Level.SEVERE, null, ex);

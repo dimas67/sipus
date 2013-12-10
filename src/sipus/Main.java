@@ -16,11 +16,9 @@
  */
 package sipus;
 
-import de.muntjak.tinylookandfeel.Theme;
 import de.muntjak.tinylookandfeel.TinyLookAndFeel;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
-import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
